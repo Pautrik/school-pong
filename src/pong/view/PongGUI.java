@@ -37,8 +37,8 @@ import static pong.model.Pong.GAME_WIDTH;
  */
 public class PongGUI extends Application {
 
-    private Pong pong;                  // The OO model (the data and logic for the game)
-    private boolean running = false;    // Is game running?
+    private Pong pong;					// The OO model (the data and logic for the game)
+    private boolean running = false;	// Is game running?
 
     // ------- Keyboard handling ----------------------------------
 
@@ -55,7 +55,6 @@ public class PongGUI extends Application {
                 // TODO
                 break;
             case Q:
-                // TODO
                 break;
             case A:
                // TODO
@@ -103,17 +102,14 @@ public class PongGUI extends Application {
     // ---------- Menu actions ---------------------
 
     private void newGame() {
-        // GUI handling
         menu.fixMenusNewGame();
         renderBackground();
 
-        // Build the model
-        Paddle rightPaddle = null;  // For now
-        Paddle leftPaddle = null;
-
-        // TODO Construct the model
+        Paddle leftPaddle = new Paddle(pong.LEFT_PADDLE_X);
+        Paddle rightPaddle = new Paddle(pong.RIGHT_PADDLE_X);
+        Ball ball = new Ball(300);
         //
-        // Finally pong =
+        this.pong = new Pong(leftPaddle, rightPaddle, ball);
 
         // Map objects to sprites
         assets.bind(rightPaddle, assets.rightPaddle);
@@ -190,12 +186,12 @@ public class PongGUI extends Application {
     private boolean renderDebug = false; //true;
 
     private void render() {
-        fg.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);    // Clear everything
+        fg.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);	// Clear everything
         fg.setFill(assets.colorFgText);
         fg.setFont(Font.font(18));
         fg.fillText("Points: " + pong.getPointsLeft(), 10, 20);
         fg.fillText("Points: " + pong.getPointsRight(), 500, 20);
-        for (IPositionable d : pong.getPositionables()) {
+        for (IPositionable d : pong.getDrawables()) {
             if (renderDebug) {
                 fg.strokeRect(d.getX(), d.getY(), d.getWidth(), d.getHeight());
             } else {
@@ -224,7 +220,6 @@ public class PongGUI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
         BorderPane root = new BorderPane();
         root.setTop(menu);
 

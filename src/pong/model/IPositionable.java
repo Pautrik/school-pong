@@ -8,13 +8,8 @@ package pong.model;
 
  */
 public interface IPositionable {
-
-    double getX();      // MinX and Y is upper left corner (y-axis pointing donw)
-
+    double getX();
     double getY();
-
     double getWidth();
-
     double getHeight();
-
 }

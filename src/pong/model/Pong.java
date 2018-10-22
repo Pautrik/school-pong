@@ -19,46 +19,60 @@ public class Pong {
     public static final double GAME_HEIGHT = 400;
     public static final double BALL_SPEED_FACTOR = 1.02;
     public static final long HALF_SEC = 500_000_000;
-
+    public static final double RIGHT_PADDLE_X = GAME_WIDTH - 50;
+    public static final double LEFT_PADDLE_X = 50;
 
     private int pointsLeft;
     private int pointsRight;
 
+    private List<IPositionable> drawables;
 
-    // TODO Constructor
+    private Paddle leftPaddle;
+    private Paddle rightPaddle;
+    private Ball ball;
 
-    // --------  Game Logic -------------
+    // --------	 Game Logic -------------
 
-    private long timeForLastHit;         // To avoid multiple collisions
+    private long timeForLastHit;		 // To avoid multiple collisions
+
+    public Pong(Paddle leftPaddle, Paddle rightPaddle, Ball ball) {
+        this.drawables = new ArrayList<IPositionable>();
+
+        pointsLeft = 0;
+        pointsRight = 0;
+
+        this.leftPaddle = leftPaddle;
+        this.rightPaddle = rightPaddle;
+        this.ball = ball;
+
+        this.drawables.add(leftPaddle);
+        this.drawables.add(rightPaddle);
+        this.drawables.add(ball);
+    }
 
     public void update(long now) {
 
-      // TODO Most game logic here, i.e. move paddles etc.
     }
 
+    // --- Used by GUI	------------------------
 
-
-    // --- Used by GUI  ------------------------
-
-    public List<IPositionable> getPositionables() {
-        List<IPositionable> drawables = new ArrayList<>();
-        // TODO
-        return drawables;
+    public List<IPositionable> getDrawables() {
+        return this.drawables;
     }
 
     public int getPointsLeft() {
-        return pointsLeft;
+        return this.pointsLeft;
     }
 
     public int getPointsRight() {
-        return pointsRight;
+        return this.pointsRight;
     }
 
-    public void setSpeedRightPaddle(double dy) {
-        // TODO
+    public Paddle getLeftPaddle() {
+        return this.leftPaddle;
     }
 
-    public void setSpeedLeftPaddle(double dy) {
-        // TODO
+    public Paddle getRightPaddle() {
+        return this.rightPaddle;
     }
 }
